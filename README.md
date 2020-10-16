@@ -2,10 +2,15 @@
 <a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
 
 # Input Offset Voltage Correction on PIC18F16Q41
-The Operational Amplifier (OPA) module in the PIC18-Q family is a general-purpose operational amplifier. In applications where the devices are subjected to non-ambient temperatures, the input offset voltage of the OPA module can change and cause errors on the output of the peripheral. To compensate for this effect, the ADC can be used to adjust the offset correction register in field. This code example demonstrates this algorithm at ambient temperature by simulating offset error through constant changes to the offset register.
+The Operational Amplifier (OPA) module in the PIC18-Q41 family is a general-purpose operational amplifier. In applications where the devices are subjected to non-ambient temperatures, the input offset voltage of the OPA module can change and cause errors on the output of the peripheral. To compensate for this effect, the ADC can be used to adjust the offset correction register in field. This code example demonstrates this algorithm at ambient temperature by simulating offset error through constant changes to the offset register.
 
 ## Related Documentation
-TBxxxx: Using Operational Amplifiers in PIC16 and PIC18<br>
+
+[TB3280: Using Operational Amplifiers in PIC16 and PIC18](http://ww1.microchip.com/downloads/en/DeviceDoc/Using-the-Operational-Amplifier-on-PIC16-and-PIC18-90003280A.pdf)  
+
+[Code Example: Gain and Offset Calibration of the Analog Signal Conditioning (OPAMP) Peripheral (MPLAB)](https://github.com/microchip-pic-avr-examples/avr128db48-opamp-gain-and-offset-calibration-mplab)  
+[Code Example: Gain and Offset Calibration of the Analog Signal Conditioning (OPAMP) Peripheral (Studio)](https://github.com/microchip-pic-avr-examples/avr128db48-opamp-gain-and-offset-calibration)  
+
 
 ## Software Used
 

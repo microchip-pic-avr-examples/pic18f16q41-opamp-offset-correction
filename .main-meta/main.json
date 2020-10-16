@@ -4,10 +4,10 @@
     "content": {
         "metaDataVersion": "1.1.0",
         "name": "com.microchip.mcu8.mplabx.project.pic18f16q41-opamp-offset-correction",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "displayName": "OPAMP Offset Correction on PIC18F16Q41",
         "projectName": "pic18f16q41-opamp-offset-correction",
-        "shortDescription": "PIC18F16Q41 Correcting the offset of the OPAMP",
+        "shortDescription": "PIC18F16Q41 - Correcting the offset of the OPAMP",
         "ide": {
             "name": "MPLABX",
             "semverRange": ">=5.40.0"
