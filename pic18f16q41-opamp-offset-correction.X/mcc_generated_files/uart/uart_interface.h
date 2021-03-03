@@ -1,3 +1,26 @@
+/**
+  UART1 Generated Driver API Header File
+
+  @Company
+    Microchip Technology Inc.
+
+  @File Name
+    uart1_interface.h
+
+  @Summary
+    This is the generated driver interface header file for the UART1 driver.
+
+  @Description
+    This file provides common enumerations for UART1 driver.
+    Generation Information :
+        Product Revision  :  CCL - 1.8.2
+        Device            :  PIC18F47Q43
+        Driver Version    :  1.0.0
+    The generated drivers are tested against the following:
+        Compiler          :  XC8 v2.2
+        MPLAB             :  Standalone
+*/
+
 /*
 Copyright (c) [2012-2020] Microchip Technology Inc.  
 
@@ -7,7 +30,7 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     with Microchip products. See the Microchip license agreement accompanying 
     this software, if any, for additional info regarding your rights and 
     obligations.
-
+    
     MICROCHIP SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT 
     WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT 
     LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT 
@@ -17,7 +40,7 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     THEORY FOR ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT 
     LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES, 
     OR OTHER SIMILAR COSTS. 
-
+    
     To the fullest extend allowed by law, Microchip and its licensors 
     liability will not exceed the amount of fees, if any, that you paid 
     directly to Microchip to use this software. 
@@ -31,62 +54,37 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     third party licenses prohibit any of the restrictions described here, 
     such restrictions will not apply to such third party software.
 */
-#include "mcc_generated_files/system/system.h"
 
-#include "utility.h"
-#include "calibration.h"
-#include "constants.h"
-
-#define Timer2_HasOverflowOccured() PIR3bits.TMR2IF
-#define Timer2_ClearOverflow() PIR3bits.TMR2IF = 0b0
-
-#define Timer4_HasOverflowOccured() PIR10bits.TMR4IF
-#define Timer4_ClearOverflow() PIR10bits.TMR4IF = 0b0
-
-void __interrupt(irq(U1TX),base(8)) UART_TX_HOTFIX_ISR()
-{
-    UART1_Transmit_ISR();
-}
-
-int main(void)
-{
-    // Initialize the device
-    SYSTEM_Initialize();
-    INTERRUPT_GlobalInterruptHighEnable();
-    INTERRUPT_GlobalInterruptLowEnable();
-    
-#ifdef STD_OUTPUT
-    printRegisterLine("PoR Offset: 0x", OPA1OFFSET);
-#endif
-    
-    //TODO: Remove UART Hotfix before release
-    
-    Timer2_Start();
-    Timer4_Start();
-    
-    while (1)
-    {
-        //Calibration timer flag
-        if (Timer2_HasOverflowOccured())
-        {                 
-            Timer2_ClearOverflow();
-            Timer2_Stop();
-                        
-            //Run the calibration routine
-            runCalibration();
-            
-            Timer2_Start();
-        }
-        
-        //10ms "error" routine
-        if (Timer4_HasOverflowOccured())
-        {
-            Timer4_ClearOverflow();
-            OPA1OFFSET--;
-        }
-    }
-    return 0;
-}
+#ifndef UART_INTERFACE_H
+#define UART_INTERFACE_H
 /**
- End of File
+  Section: Included Files
 */
+#include <stdbool.h>
+#include <stdint.h>
+#include <xc.h>
+    
+/**
+  UART_INTERFACE
+
+  @Description
+    Structure containing the function pointers of UART1 driver.
+ */
+struct UART_INTERFACE
+{   
+    void (*Initialize)(void);
+    uint8_t (*Read)(void);
+    void (*Write)(uint8_t);
+    void (*RxCompleteCallbackRegister)(void (*CallbackHandler));
+    void (*TxCompleteCallbackRegister)(void (*CallbackHandler));
+    void (*ErrorCallbackRegister)(void (*CallbackHandler)(void));
+    void (*FramingErrorCallbackRegister)(void (*CallbackHandler)(void));
+    void (*OverrunErrorCallbackRegister)(void (*CallbackHandler)(void));
+    void (*ParityErrorCallbackRegister)(void (*CallbackHandler));
+    void (*ChecksumErrorCallbackRegister)(void (*CallbackHandler));
+    bool (*IsRxReady)(void);
+    bool (*IsTxReady)(void);
+    bool (*IsTxDone)(void);
+};
+
+#endif // end of UART_INTERFACE_H

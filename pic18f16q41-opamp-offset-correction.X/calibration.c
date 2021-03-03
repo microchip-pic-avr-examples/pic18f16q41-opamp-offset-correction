@@ -4,8 +4,9 @@
 #include "calibration.h"
 #include "utility.h"
 #include "constants.h"
+#include "opamp.h"
 
-#include "mcc_generated_files/mcc.h"
+#include "mcc_generated_files/system/system.h"
 
 void debugOutput(uint16_t NIvalue, uint16_t valAQ)
 {
@@ -21,10 +22,10 @@ void startCalibration(void)
     INDICATOR_LED_LAT = 1;
     
     //Set unity gain
-    OPA1_EnableSoftwareUnityGain();
+    OPAMP_EnableUnityGain();
     
     //Remove the feedback resistors from loop
-    OPA1_SetNegativeChannel(OPA1_negChannel_No_Connection);
+    OPAMP_SetNegativeChannel(NO_CONNECTION);
     
 #ifdef STD_OUTPUT
     printRegisterLine("Former Offset: 0x", OPA1OFFSET);
@@ -42,16 +43,16 @@ void stopCalibration(void)
     INDICATOR_LED_LAT = 0;
 
     //Release from Unity Gain
-    OPA1CON0bits.UG = 0;
+    OPAMP_DisableUnityGain();
     
     //Add the feedback resistors back in
-    OPA1_SetNegativeChannel(OPA1_negChannel_GSEL);
+    OPAMP_SetNegativeChannel(GSEL);
 }
 
 //Internal function - finds the step response needed
 int8_t lookupIncrement(int16_t error, uint8_t* history)
 {
-    uint8_t increment;
+    int8_t increment;
     if (error < 0)  //Negative Error
     { 
         error *= -1;
@@ -128,11 +129,11 @@ void runCalibration(void)
             else    //Offset range is remaining
                 
                 if (OPA1OFFSET + increment > 0xFF)  //If bigger than 8bit...
-                    OPA1_SetInputOffset(0xFF);
+                    OPAMP_SetInputOffset(0xFF);
                 else if (OPA1OFFSET + increment < 0) //If under 0...
-                    OPA1_SetInputOffset(0x00);
+                    OPAMP_SetInputOffset(0x00);
                 else                                //Normal case
-                    OPA1_SetInputOffset(OPA1OFFSET + increment); 
+                    OPAMP_SetInputOffset(OPA1OFFSET + increment); 
             convCounter++;
         }
 
@@ -161,7 +162,7 @@ void runCalibration(void)
 void captureADC(adcc_channel_t ch)
 {
     //Finish any UART Sends before sleep
-    while (!UART1_is_tx_done());
+    while (!UART1_IsTxDone());
     
     ADCC_StartConversion(ch);
     Sleep();

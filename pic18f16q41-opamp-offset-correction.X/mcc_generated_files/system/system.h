@@ -1,3 +1,24 @@
+/**
+  @Generated CCL Header File
+
+  @Company:
+    Microchip Technology Inc.
+
+  @File Name:
+    system.h
+
+  @Summary:
+    This is the system.h file generated using CCL
+
+  @Description:
+    This header file provides implementations for driver APIs for all modules selected in the GUI.
+    Generation Information :
+        Driver Version    :  2.00
+    The generated drivers are tested against the following:
+        Compiler          :  XC8 v2.31
+        MPLAB             :  MPLAB X 5.45
+*/
+
 /*
 Copyright (c) [2012-2020] Microchip Technology Inc.  
 
@@ -7,7 +28,7 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     with Microchip products. See the Microchip license agreement accompanying 
     this software, if any, for additional info regarding your rights and 
     obligations.
-
+    
     MICROCHIP SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT 
     WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT 
     LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT 
@@ -17,7 +38,7 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     THEORY FOR ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT 
     LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES, 
     OR OTHER SIMILAR COSTS. 
-
+    
     To the fullest extend allowed by law, Microchip and its licensors 
     liability will not exceed the amount of fees, if any, that you paid 
     directly to Microchip to use this software. 
@@ -31,62 +52,36 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     third party licenses prohibit any of the restrictions described here, 
     such restrictions will not apply to such third party software.
 */
-#include "mcc_generated_files/system/system.h"
 
-#include "utility.h"
-#include "calibration.h"
-#include "constants.h"
+#ifndef SYSTEM_H
+#define	SYSTEM_H
+#include <xc.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <conio.h>
+#include "config_bits.h"
+#include "../timer/tmr4.h"
+#include "../uart/uart1.h"
+#include "../system/clock.h"
+#include "../adc/adcc.h"
+#include "../system/interrupt.h"
+#include "../timer/tmr2.h"
+#include "../system/pins.h"
 
-#define Timer2_HasOverflowOccured() PIR3bits.TMR2IF
-#define Timer2_ClearOverflow() PIR3bits.TMR2IF = 0b0
+/**
+ * @Param
+    none
+ * @Returns
+    none
+ * @Description
+    Initializes the device to the default states configured in the
+ *                  MCC GUI
+ * @Example
+    SYSTEM_Initialize(void);
+ */
+void SYSTEM_Initialize(void);
 
-#define Timer4_HasOverflowOccured() PIR10bits.TMR4IF
-#define Timer4_ClearOverflow() PIR10bits.TMR4IF = 0b0
-
-void __interrupt(irq(U1TX),base(8)) UART_TX_HOTFIX_ISR()
-{
-    UART1_Transmit_ISR();
-}
-
-int main(void)
-{
-    // Initialize the device
-    SYSTEM_Initialize();
-    INTERRUPT_GlobalInterruptHighEnable();
-    INTERRUPT_GlobalInterruptLowEnable();
-    
-#ifdef STD_OUTPUT
-    printRegisterLine("PoR Offset: 0x", OPA1OFFSET);
-#endif
-    
-    //TODO: Remove UART Hotfix before release
-    
-    Timer2_Start();
-    Timer4_Start();
-    
-    while (1)
-    {
-        //Calibration timer flag
-        if (Timer2_HasOverflowOccured())
-        {                 
-            Timer2_ClearOverflow();
-            Timer2_Stop();
-                        
-            //Run the calibration routine
-            runCalibration();
-            
-            Timer2_Start();
-        }
-        
-        //10ms "error" routine
-        if (Timer4_HasOverflowOccured())
-        {
-            Timer4_ClearOverflow();
-            OPA1OFFSET--;
-        }
-    }
-    return 0;
-}
+#endif	/* SYSTEM_H */
 /**
  End of File
 */

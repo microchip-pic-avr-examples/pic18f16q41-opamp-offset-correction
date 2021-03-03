@@ -1,3 +1,21 @@
+/** 
+  @Company
+    Microchip Technology Inc.
+ 
+  @File Name
+    TMR_interface.h
+ 
+  @Summary
+    This is the generated header file for Timer module interfaces.
+ 
+  @Description
+    This header file provides interfaces to Timer driver APIs.
+    Generation Information :
+        Driver Version    :  1.0.0
+    The generated drivers are tested against the following:
+        MPLAB             :  MPLAB X v5.45 and above
+*/
+
 /*
 Copyright (c) [2012-2020] Microchip Technology Inc.  
 
@@ -7,7 +25,7 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     with Microchip products. See the Microchip license agreement accompanying 
     this software, if any, for additional info regarding your rights and 
     obligations.
-
+    
     MICROCHIP SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT 
     WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT 
     LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT 
@@ -17,7 +35,7 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     THEORY FOR ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT 
     LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES, 
     OR OTHER SIMILAR COSTS. 
-
+    
     To the fullest extend allowed by law, Microchip and its licensors 
     liability will not exceed the amount of fees, if any, that you paid 
     directly to Microchip to use this software. 
@@ -31,62 +49,34 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     third party licenses prohibit any of the restrictions described here, 
     such restrictions will not apply to such third party software.
 */
-#include "mcc_generated_files/system/system.h"
 
-#include "utility.h"
-#include "calibration.h"
-#include "constants.h"
+#ifndef TMR_INTERFACE_H
+#define TMR_INTERFACE_H
 
-#define Timer2_HasOverflowOccured() PIR3bits.TMR2IF
-#define Timer2_ClearOverflow() PIR3bits.TMR2IF = 0b0
-
-#define Timer4_HasOverflowOccured() PIR10bits.TMR4IF
-#define Timer4_ClearOverflow() PIR10bits.TMR4IF = 0b0
-
-void __interrupt(irq(U1TX),base(8)) UART_TX_HOTFIX_ISR()
-{
-    UART1_Transmit_ISR();
-}
-
-int main(void)
-{
-    // Initialize the device
-    SYSTEM_Initialize();
-    INTERRUPT_GlobalInterruptHighEnable();
-    INTERRUPT_GlobalInterruptLowEnable();
-    
-#ifdef STD_OUTPUT
-    printRegisterLine("PoR Offset: 0x", OPA1OFFSET);
-#endif
-    
-    //TODO: Remove UART Hotfix before release
-    
-    Timer2_Start();
-    Timer4_Start();
-    
-    while (1)
-    {
-        //Calibration timer flag
-        if (Timer2_HasOverflowOccured())
-        {                 
-            Timer2_ClearOverflow();
-            Timer2_Stop();
-                        
-            //Run the calibration routine
-            runCalibration();
-            
-            Timer2_Start();
-        }
-        
-        //10ms "error" routine
-        if (Timer4_HasOverflowOccured())
-        {
-            Timer4_ClearOverflow();
-            OPA1OFFSET--;
-        }
-    }
-    return 0;
-}
 /**
- End of File
-*/
+ * @brief This file contains API prototypes and other datatypes for Timer-0 module.
+ * @defgroup timer_interface Timer Interface
+ * @{
+ */
+
+#include<stddef.h>
+        
+/**
+ @ingroup timer_interface
+ @typedef struct TMR_INTERFACE
+ @brief This structure contains the interfaces to Timer module
+ */
+ 
+struct TMR_INTERFACE
+{
+    void (*Initialize)(void);
+    void (*Start)(void);
+    void (*Stop)(void);
+    void (*PeriodCountSet)(size_t count);
+    void (*TimeoutCallbackRegister)(void (* CallbackHandler)(void));
+    void (*Tasks)(void);
+};
+/**
+ * @}
+ */
+#endif //TMR_INTERFACE_H

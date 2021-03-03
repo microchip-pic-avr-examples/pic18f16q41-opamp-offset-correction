@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 #include <stdint.h>    
-#include "mcc_generated_files/mcc.h"
+#include "mcc_generated_files/system/system.h"
     
     //Run calibration routine
     void runCalibration(void);
