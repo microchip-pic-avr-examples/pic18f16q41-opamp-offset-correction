@@ -48,10 +48,37 @@ void __interrupt(irq(U1TX),base(8)) UART_TX_HOTFIX_ISR()
     UART1_Transmit_ISR();
 }
 
+//Initializes the OPAMP as an inverting amplifier
+void configureOPA_Inverting()
+{
+    //Clear Enable
+    OPA1CON0 = 0x00;
+    
+    //GSEL R1 = 8R and R2 = 8R, R2/R1 = 1; RESON Enabled; NSS OPA1IN1-; 
+    OPA1CON1 = 0x39;
+
+    //NCH GSEL; PCH Vdd/2; 
+    OPA1CON2 = 0x13;
+
+    //FMS OPA1OUT; PSS OPA1IN0+; 
+    OPA1CON3 = 0x80;
+
+    //OREN Software Override; HWCH User Defined Feedback; ORPOL Non Inverted; HWCL User Defined Feedback; 
+    OPA1HWC = 0x00;
+
+    //ORS LFINTOSC; 
+    OPA1ORS = 0x00;    
+    
+    //Turn on the OPAMP
+    OPA1CON0bits.EN = 0b1;
+}
+
 int main(void)
 {
     // Initialize the device
     SYSTEM_Initialize();
+    configureOPA_Inverting();
+    
     INTERRUPT_GlobalInterruptHighEnable();
     INTERRUPT_GlobalInterruptLowEnable();
     

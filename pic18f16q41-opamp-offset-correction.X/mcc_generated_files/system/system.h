@@ -66,6 +66,7 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
 #include "../adc/adcc.h"
 #include "../system/interrupt.h"
 #include "../timer/tmr2.h"
+#include "../fvr/fvr.h"
 #include "../system/pins.h"
 
 /**

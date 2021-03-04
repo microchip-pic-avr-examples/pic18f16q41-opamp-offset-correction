@@ -1,22 +1,22 @@
 /**
-  @Generated CCL Source File
+  FVR Generated Driver File
 
-  @Company:
+  @Company
     Microchip Technology Inc.
 
-  @File Name:
-    system.c
+  @File Name
+    fvr.c
 
-  @Summary:
-    This is the system.c file generated using CCL
+  @Summary
+    This is the generated driver implementation file for the FVR driver
 
-  @Description:
-    This header file provides implementations for driver APIs for all modules selected in the GUI.
+  @Description
+    This source file provides APIs for FVR.
     Generation Information :
-        Driver Version    :  2.00
+        Driver Version    :  2.01
     The generated drivers are tested against the following:
-        Compiler          :  XC8 v2.31
-        MPLAB             :  MPLAB X 5.45
+        Compiler          :  XC8 v2.20
+        MPLAB 	          :  MPLAB X v5.40 
 */
 
 /*
@@ -53,21 +53,29 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
     such restrictions will not apply to such third party software.
 */
 
- /**
-   Section: Included Files
- */
-#include "../system.h"
+/**
+  Section: Included Files
+*/
+
+#include <xc.h>
+#include "../fvr.h"
 
 
-void SYSTEM_Initialize(void)
+
+/**
+  Section: FVR APIs
+*/
+
+void FVR_Initialize(void)
 {
-    Timer4_Initialize();
-    UART1_Initialize();
-    CLOCK_Initialize();
-    ADCC_Initialize();
-    INTERRUPT_Initialize();
-    Timer2_Initialize();
-    FVR_Initialize();
-    PIN_MANAGER_Initialize();
+    // ADFVR 4x; CDAFVR off; TSRNG Lo_range; TSEN disabled; FVREN enabled; 
+    FVRCON = 0xC3;
 }
 
+bool FVR_IsOutputReady(void)
+{
+	return (FVRCONbits.FVRRDY);
+}
+/**
+ End of File
+*/
