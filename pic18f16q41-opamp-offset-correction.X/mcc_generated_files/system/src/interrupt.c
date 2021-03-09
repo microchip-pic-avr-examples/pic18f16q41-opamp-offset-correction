@@ -83,6 +83,7 @@ void  INTERRUPT_Initialize (void)
 
     GIE = state;
     // Assign peripheral interrupt priority vectors
+    IPR0bits.IOCIP = 1;
     IPR2bits.ADTIP = 1;
     IPR4bits.U1TXIP = 1;
 
@@ -114,6 +115,11 @@ void  INTERRUPT_Initialize (void)
 
 void __interrupt(irq(default),base(8)) Default_ISR()
 {
+}
+
+void __interrupt(irq(IOC), base(8)) IOC_ISR()
+{
+    PIN_MANAGER_IOC();
 }
 
 void __interrupt(irq(INT0),base(8)) INT0_ISR()

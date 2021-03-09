@@ -89,7 +89,7 @@ void ADCC_Initialize(void)
     ADSTPTH = 0x0;
     //ADACCU 0x0; 
     ADACCU = 0x0;
-    //ADRPT 0x0; 
+    //ADRPT 32; 
     ADRPT = 0x20;
     //ADCHS ANA0; 
     ADPCH = 0x0;

@@ -9,7 +9,7 @@ extern "C" {
     
 //UART Output Enables
 #define STD_OUTPUT
-#define DEBUG_OUTPUT
+//#define DEBUG_OUTPUT
     
 //Error codes for Calibration
 #define NO_ERROR            0

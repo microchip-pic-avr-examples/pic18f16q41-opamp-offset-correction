@@ -97,6 +97,7 @@ void PIN_MANAGER_Initialize(void)
     /**
     PPS registers
     */
+    T4INPPS = 0x11; //RC1->TMR4:T4IN;
     RB7PPS = 0x10;  //RB7->UART1:TX1;
 
    /**
@@ -111,6 +112,7 @@ void PIN_MANAGER_Initialize(void)
     IOCCP = 0x0;
     IOCCN = 0x0;
     IOCCF = 0x0;
+
 
 }
   
