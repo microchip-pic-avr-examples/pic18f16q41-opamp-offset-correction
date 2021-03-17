@@ -95,8 +95,8 @@ void Timer2_Initialize(void){
 
     // Clearing IF flag.
      PIR3bits.TMR2IF = 0;
-    // TCKPS 1:128; TMRON off; TOUTPS 1:15; 
-    T2CON = 0x7E;
+    // TCKPS 1:128; TMRON on; TOUTPS 1:15; 
+    T2CON = 0xFE;
 }
 
 void Timer2_ModeSet(Timer2_HLT_MODE mode)

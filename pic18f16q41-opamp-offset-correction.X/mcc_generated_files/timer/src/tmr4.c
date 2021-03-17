@@ -95,8 +95,8 @@ void Timer4_Initialize(void){
 
     // Clearing IF flag.
      PIR10bits.TMR4IF = 0;
-    // TCKPS 1:16; TMRON off; TOUTPS 1:1; 
-    T4CON = 0x40;
+    // TCKPS 1:16; TMRON on; TOUTPS 1:1; 
+    T4CON = 0xC0;
 }
 
 void Timer4_ModeSet(Timer4_HLT_MODE mode)

@@ -83,7 +83,6 @@ void  INTERRUPT_Initialize (void)
 
     GIE = state;
     // Assign peripheral interrupt priority vectors
-    IPR0bits.IOCIP = 1;
     IPR2bits.ADTIP = 1;
 
     // Clear the interrupt flag
