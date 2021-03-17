@@ -10,7 +10,7 @@
         "shortDescription": "PIC18F16Q41 - Correcting the offset of the OPAMP",
         "ide": {
             "name": "MPLAB X",
-            "semverRange": ">=5.45.0"
+            "semverRange": ">=5.40.0"
         },
         "compiler": [
 			{
