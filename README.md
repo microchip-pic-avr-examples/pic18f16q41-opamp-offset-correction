@@ -14,7 +14,7 @@ The Operational Amplifier (OPA) module in the PIC18-Q41 family is a general-purp
 ## Software Used
 
 * <a href="https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github">MPLAB® X IDE 5.45 or newer</a>
-* <a href="https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github">Microchip XC8 Compiler v2.31 or newer</a>
+* <a href="https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github">MPLAB XC8 Compiler v2.31 or newer</a>
 * <a href="https://www.microchip.com/mplab/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github">MPLAB Code Configurator (MCC) 4.1.0 or newer</a>
 * [MPLAB Data Visualizer Plugin](https://www.microchip.com/en-us/development-tools-tools-and-software/embedded-software-center/mplab-data-visualizer?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github) or a Serial Terminal (used for displaying the calibration results)
 
