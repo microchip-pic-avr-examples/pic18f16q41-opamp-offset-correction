@@ -85,7 +85,6 @@ void  INTERRUPT_Initialize (void)
     // Assign peripheral interrupt priority vectors
     IPR0bits.IOCIP = 1;
     IPR2bits.ADTIP = 1;
-    IPR4bits.U1TXIP = 1;
 
     // Clear the interrupt flag
     // Set the external interrupt edge detect

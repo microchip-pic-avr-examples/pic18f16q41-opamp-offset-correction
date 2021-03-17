@@ -64,7 +64,7 @@ const struct UART_INTERFACE UART1_Interface = {
   .Write = UART1_Write,
   .Read = UART1_Read,
   .RxCompleteCallbackRegister = NULL,
-  .TxCompleteCallbackRegister = UART1_SetTxInterruptHandler,
+  .TxCompleteCallbackRegister = NULL,
   .ErrorCallbackRegister = UART1_SetErrorHandler,
   .FramingErrorCallbackRegister = UART1_SetFramingErrorHandler,
   .OverrunErrorCallbackRegister = UART1_SetOverrunErrorHandler,
@@ -166,10 +166,6 @@ void UART1_Initialize(void)
 
     uart1RxLastError.status = 0;
 
-    // initializing the driver state
-    uart1TxHead = 0;
-    uart1TxTail = 0;
-    uart1TxBufferRemaining = sizeof(uart1TxBuffer);
 }
 
 bool UART1_IsRxReady(void)
@@ -184,7 +180,7 @@ bool UART1_is_rx_ready(void)
 
 bool UART1_IsTxReady(void)
 {
-    return (uart1TxBufferRemaining ? true : false);
+    return (bool)(PIR4bits.U1TXIF && U1CON0bits.TXEN);
 }
 
 bool UART1_is_tx_ready(void)
@@ -238,25 +234,11 @@ uint8_t UART1_Read(void)
 
 void UART1_Write(uint8_t txData)
 {
-    while(0 == uart1TxBufferRemaining)
+    while(0 == PIR4bits.U1TXIF)
     {
     }
 
-    if(0 == PIE4bits.U1TXIE)
-    {
-        U1TXB = txData;
-    }
-    else
-    {
-        PIE4bits.U1TXIE = 0;
-        uart1TxBuffer[uart1TxHead++] = txData;
-        if(sizeof(uart1TxBuffer) <= uart1TxHead)
-        {
-            uart1TxHead = 0;
-        }
-        uart1TxBufferRemaining--;
-    }
-    PIE4bits.U1TXIE = 1;
+    U1TXB = txData;    // Write the data byte to the USART.
 }
 
 char getch(void)

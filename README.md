@@ -11,18 +11,17 @@ The Operational Amplifier (OPA) module in the PIC18-Q41 family is a general-purp
 [Code Example: Gain and Offset Calibration of the Analog Signal Conditioning (OPAMP) Peripheral (MPLAB)](https://github.com/microchip-pic-avr-examples/avr128db48-opamp-gain-and-offset-calibration-mplab)  
 [Code Example: Gain and Offset Calibration of the Analog Signal Conditioning (OPAMP) Peripheral (Studio)](https://github.com/microchip-pic-avr-examples/avr128db48-opamp-gain-and-offset-calibration)  
 
-
 ## Software Used
 
-* <a href="http://www.microchip.com/mplab/mplab-x-ide">MPLAB® IDE 5.40 or newer</a>
-* <a href="https://www.microchip.com/mplab/compilers">Microchip XC8 Compiler 2.20 or newer</a>
-* <a href="https://www.microchip.com/mplab/mplab-code-configurator">MPLAB® Code Configurator (MCC) 3.95.0 or newer</a>
-* Serial Terminal (used for displaying the calibration results)
+* <a href="https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github">MPLAB® X IDE 5.45 or newer</a>
+* <a href="https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github">Microchip XC8 Compiler v2.31 or newer</a>
+* <a href="https://www.microchip.com/mplab/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github">MPLAB Code Configurator (MCC) 4.1.0 or newer</a>
+* [MPLAB Data Visualizer Plugin](https://www.microchip.com/en-us/development-tools-tools-and-software/embedded-software-center/mplab-data-visualizer?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github) or a Serial Terminal (used for displaying the calibration results)
 
 ## Hardware Used
 
-* <a href="https://www.microchip.com/wwwproducts/en/PIC18F16Q41">PIC18F16Q41 Product Information</a><br>
-* <a href="https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DM164137"> Microchip Curiosity Development Board (DM164137), Rev 4 </a>
+* <a href="https://www.microchip.com/wwwproducts/en/PIC18F16Q41?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github">PIC18F16Q41 Product Information</a><br>
+* <a href="https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DM164137?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q41&utm_content=pic18q41_opamp_offset_github"> Microchip Curiosity Development Board (DM164137), Rev 4 </a>
 * *(Optional)* Variable Power Supply (1 - 5V range) for testing the OPA Module
 
 ## Setup

@@ -109,11 +109,6 @@ uart1_status_t __attribute__(( deprecated )) UART1_get_last_status(void);
  * Deprecated APIs end
  *************************************************************************************************************/
 
-/**
- Section: Global variables
- */
-extern volatile uint8_t uart1TxBufferRemaining;
-extern volatile uint8_t uart1RxCount;
 
 /**
   Section: UART1 APIs

@@ -37,16 +37,12 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
 #include "calibration.h"
 #include "constants.h"
 
+//Detect if a Timer has Overflowed
 #define Timer2_HasOverflowOccured() PIR3bits.TMR2IF
 #define Timer2_ClearOverflow() PIR3bits.TMR2IF = 0b0
 
 #define Timer4_HasOverflowOccured() PIR10bits.TMR4IF
 #define Timer4_ClearOverflow() PIR10bits.TMR4IF = 0b0
-
-void __interrupt(irq(U1TX),base(8)) UART_TX_HOTFIX_ISR()
-{
-    UART1_Transmit_ISR();
-}
 
 //Initializes the OPAMP as an inverting amplifier
 void configureOPA_Inverting()
