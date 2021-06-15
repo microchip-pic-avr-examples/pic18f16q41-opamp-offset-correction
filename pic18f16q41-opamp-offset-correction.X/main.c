@@ -44,36 +44,10 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
 #define Timer4_HasOverflowOccured() PIR10bits.TMR4IF
 #define Timer4_ClearOverflow() PIR10bits.TMR4IF = 0b0
 
-//Initializes the OPAMP as an inverting amplifier
-void configureOPA_Inverting()
-{
-    //Clear Enable
-    OPA1CON0 = 0x00;
-    
-    //GSEL R1 = 8R and R2 = 8R, R2/R1 = 1; RESON Enabled; NSS OPA1IN1-; 
-    OPA1CON1 = 0x39;
-
-    //NCH GSEL; PCH Vdd/2; 
-    OPA1CON2 = 0x13;
-
-    //FMS OPA1OUT; PSS OPA1IN0+; 
-    OPA1CON3 = 0x80;
-
-    //OREN Software Override; HWCH User Defined Feedback; ORPOL Non Inverted; HWCL User Defined Feedback; 
-    OPA1HWC = 0x00;
-
-    //ORS LFINTOSC; 
-    OPA1ORS = 0x00;    
-    
-    //Turn on the OPAMP
-    OPA1CON0bits.EN = 0b1;
-}
-
 int main(void)
 {
     // Initialize the device
     SYSTEM_Initialize();
-    configureOPA_Inverting();
     
     INTERRUPT_GlobalInterruptHighEnable();
     INTERRUPT_GlobalInterruptLowEnable();
@@ -81,9 +55,7 @@ int main(void)
 #ifdef STD_OUTPUT
     printRegisterLine("PoR Offset: 0x", OPA1OFFSET);
 #endif
-    
-    //TODO: Remove UART Hotfix before release
-    
+        
     Timer2_Start();
     Timer4_Start();
     

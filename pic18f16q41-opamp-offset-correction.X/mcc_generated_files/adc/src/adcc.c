@@ -63,8 +63,6 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
 /**
   Section: ADCC Module Variables
 */
-static void (*ADCC_ADI_InterruptHandler)(void);
-static void ADCC_DefaultADI_ISR(void);
 static void (*ADCC_ADTI_InterruptHandler)(void);
 static void ADCC_DefaultADTI_ISR(void);
 
@@ -122,8 +120,6 @@ void ADCC_Initialize(void)
     
     // Clear the ADC interrupt flag
     PIR1bits.ADIF = 0;
-    //Configure interrupt handlers
-    ADCC_SetADIInterruptHandler(ADCC_DefaultADI_ISR);
 
     // Clear the ADC Threshold interrupt flag
     PIR2bits.ADTIF = 0;
@@ -319,27 +315,6 @@ uint8_t ADCC_GetConversionStageStatus(void)
     return ADSTATbits.ADSTAT;
 }
 
-void __interrupt(irq(AD),base(8)) ADCC_ISR(void)
-{
-    // Clear the ADCC interrupt flag
-    PIR1bits.ADIF = 0;
-
-    if (ADCC_ADI_InterruptHandler != NULL)
-    {
-        ADCC_ADI_InterruptHandler();
-    }
-}
-
-void ADCC_SetADIInterruptHandler(void (* InterruptHandler)(void))
-{
-    ADCC_ADI_InterruptHandler = InterruptHandler;
-}
-
-static void ADCC_DefaultADI_ISR(void)
-{
-    //Add your interrupt code here or
-    //Use ADCC_SetADIInterruptHandler() function to use Custom ISR
-}
 
 void __interrupt(irq(ADT),base(8)) ADCC_ThresholdISR(void)
 {

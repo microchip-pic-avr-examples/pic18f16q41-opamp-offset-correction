@@ -734,35 +734,6 @@ uint8_t ADCC_GetConversionStageStatus(void);
 
 /**
  * @ingroup adc_with_computation
- * @brief Setter for A/D conversion ISR.
- * @param[in] InterruptHandler - Pointer to custom ISR.
- * @return void
- *
- * @details <b>API usage example</b>
- * @code
- * void customADIHandler(void)
- * {
- *    //Custom ISR code
- * }
- *
- * void main(void)
- * {
- *     ADCC_Initialize();
- *     ADCC_SetADIInterruptHandler(customADIHandler);
- *     ADCC_StartConversion(channel_ANA0);
- *
- *     //Replace with your application code
- *     while(1)
- *     {
- *     }
- * }
- * @endcode
- */
-void ADCC_SetADIInterruptHandler(void (* InterruptHandler)(void));
-
-
-/**
- * @ingroup adc_with_computation
  * @brief Setter for threshold interrupt.
  * @param[in] InterruptHandler - Pointer to custom ISR.
  * @return void

@@ -60,14 +60,15 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
 #include <stdbool.h>
 #include <conio.h>
 #include "config_bits.h"
+#include "../system/clock.h"
+#include "../system/pins.h"
+#include "../adc/adcc.h"
+#include "../fvr/fvr.h"
+#include "../opa/opa1.h"
+#include "../timer/tmr2.h"
 #include "../timer/tmr4.h"
 #include "../uart/uart1.h"
-#include "../system/clock.h"
-#include "../adc/adcc.h"
 #include "../system/interrupt.h"
-#include "../timer/tmr2.h"
-#include "../fvr/fvr.h"
-#include "../system/pins.h"
 
 /**
  * @Param
