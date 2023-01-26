@@ -41,7 +41,6 @@
             "OPA","ADCC", "FVR", "TMR2", "TMR4", "UART"
         ],
         "keywords": [
-            "Sensor",
             "Intelligent Analog"
         ],
 		"additionalData": {
