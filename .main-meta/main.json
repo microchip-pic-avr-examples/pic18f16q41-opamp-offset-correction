@@ -38,7 +38,7 @@
         },
         "author": "Microchip",
         "peripherals": [
-            "OPA","ADCC", "FVR", "TMR2", "TMR4", "UART"
+            "OPAMP","ADCC", "TMR2", "TMR4", "UART"
         ],
         "keywords": [
             "Intelligent Analog"
