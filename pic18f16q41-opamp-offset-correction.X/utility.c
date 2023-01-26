@@ -13,8 +13,11 @@ void sendString(const char* str, uint8_t sendEOL)
     int index = 0;
     while (str[index] != '\0')
     {
-        UART1_Write(str[index]);
-        index++;
+        if (UART1_IsTxReady())
+        {
+            UART1_Write(str[index]);
+            index++;
+        }
     }
     
     if (sendEOL == 0)
@@ -30,8 +33,12 @@ void sendStringSafe(const char* str, uint8_t size)
     uint8_t index = 0;
     while (index < size)
     {
-        UART1_Write(str[index]);        
-        index++;
+        if (UART1_IsTxReady())
+        {
+            UART1_Write(str[index]);  
+            index++;
+        }
+        
     }
 }
 
