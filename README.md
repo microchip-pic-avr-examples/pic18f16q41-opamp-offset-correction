@@ -2,7 +2,7 @@
 <a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
 
 # Input Offset Voltage Correction on PIC18F16Q41
-The Operational Amplifier (OPA) module in the PIC18F16Q41 family is a general-purpose operational amplifier. In applications where the devices are subjected to non-ambient temperatures, the input offset voltage of the OPA module can change and cause errors on the output of the peripheral. To compensate for this effect, the ADC can be used to adjust the offset correction register in field. This code example demonstrates this algorithm at ambient temperature by simulating offset error through constant changes to the offset register.
+The Operational Amplifier (OPA) module in the PIC18-Q41 family is a general-purpose operational amplifier. In applications where the devices are subjected to non-ambient temperatures, the input offset voltage of the OPA module can change and cause errors on the output of the peripheral. To compensate for this effect, the ADC can be used to adjust the offset correction register in field. This code example demonstrates this algorithm at ambient temperature by simulating offset error through constant changes to the offset register.
 
 ## Related Documentation
 
@@ -115,4 +115,4 @@ If the two measurements are within a set accuracy, the calibration routine stops
 - **OSCILLATING_ERROR (4)**  - The offset is oscillating, and cannot be resolved any farther.
 
 ## Summary
-This code example demonstrates an algorithm for calibrating the input offset voltage of the OPA module in PIC18F16Q41.
+This code example demonstrates an algorithm for calibrating the input offset voltage of the OPA module in PIC18-Q41 family of microcontrollers.
