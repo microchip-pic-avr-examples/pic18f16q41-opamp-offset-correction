@@ -6,8 +6,8 @@ The Operational Amplifier (OPA) module in the PIC18-Q41 family of microcontrolle
 
 ## Related Documentation
 
-[TB3280 - Using Operational Amplifiers in PIC16 and PIC18](http://ww1.microchip.com/downloads/en/DeviceDoc/Using-the-Operational-Amplifier-on-PIC16-and-PIC18-90003280A.pdf)  
-[AN3110 - Maximizing the Signal: How to Use and Understand Embedded Operational Amplifiers](https://www.microchip.com/en-us/application-notes/an3110)  
+[(TB3280) Using Operational Amplifiers in PIC16 and PIC18](http://ww1.microchip.com/downloads/en/DeviceDoc/Using-the-Operational-Amplifier-on-PIC16-and-PIC18-90003280A.pdf)  
+[(AN3110) Maximizing the Signal: How to Use and Understand Embedded Operational Amplifiers](https://www.microchip.com/en-us/application-notes/an3110)  
 
 [Code Example: Gain and Offset Calibration of the Analog Signal Conditioning (OPAMP) Peripheral (MPLAB)](https://github.com/microchip-pic-avr-examples/avr128db48-opamp-gain-and-offset-calibration-mplab)  
 
